@@ -20,3 +20,14 @@ E:\Desktop\ok\music\music\obj\Debug\music.Properties.Resources.resources
 E:\Desktop\ok\music\music\obj\Debug\music.Form1.resources
 E:\Desktop\ok\music\music\obj\Debug\music.Form3.resources
 E:\Desktop\ok\music\music\obj\Debug\music.csproj.GenerateResource.Cache
+E:\Desktop\ok\music\bin\Debug\music.exe.config
+E:\Desktop\ok\music\obj\Debug\music.exe
+E:\Desktop\ok\music\obj\Debug\music.pdb
+E:\Desktop\ok\music\obj\Debug\music.csprojResolveAssemblyReference.cache
+E:\Desktop\ok\music\obj\Debug\music.Form2.resources
+E:\Desktop\ok\music\obj\Debug\music.Properties.Resources.resources
+E:\Desktop\ok\music\obj\Debug\music.Form1.resources
+E:\Desktop\ok\music\obj\Debug\music.Form3.resources
+E:\Desktop\ok\music\obj\Debug\music.csproj.GenerateResource.Cache
+E:\Desktop\ok\music\bin\Debug\music.exe
+E:\Desktop\ok\music\bin\Debug\music.pdb

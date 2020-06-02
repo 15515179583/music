@@ -11,10 +11,12 @@ namespace music
     {
         private String musicName;
         private String author;
-        public Music(String musicName,String author)
+        private String path;
+        public Music(String musicName,String author, String musicPath)
         {
             this.musicName = musicName;
             this.author = author;
+            this.path = musicPath.Replace('\\','/');
         }
         public String getMusicName() 
         {
@@ -23,6 +25,10 @@ namespace music
         public String getAuthor()
         {
             return this.author;
+        }
+        public String getMusicPath()
+        {
+            return this.path;
         }
     }
 }

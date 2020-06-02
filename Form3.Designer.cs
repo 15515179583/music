@@ -33,6 +33,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -50,7 +51,6 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -95,6 +95,23 @@
             this.groupBox3.Size = new System.Drawing.Size(178, 243);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
+            // 
+            // listView1
+            // 
+            this.listView1.BackColor = System.Drawing.SystemColors.Control;
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listView1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.listView1.Font = new System.Drawing.Font("宋体", 15F);
+            this.listView1.FullRowSelect = true;
+            this.listView1.Location = new System.Drawing.Point(21, 32);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.OwnerDraw = true;
+            this.listView1.ShowGroups = false;
+            this.listView1.Size = new System.Drawing.Size(136, 179);
+            this.listView1.TabIndex = 4;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // button4
             // 
@@ -225,6 +242,7 @@
             this.button9.TabIndex = 2;
             this.button9.Text = "随机切歌";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
@@ -245,7 +263,7 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.39175F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.60825F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 54F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel2.Controls.Add(this.button6, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.button8, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.button7, 1, 0);
@@ -266,6 +284,7 @@
             this.button6.Size = new System.Drawing.Size(32, 29);
             this.button6.TabIndex = 0;
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button8
             // 
@@ -273,11 +292,12 @@
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(86, 3);
+            this.button8.Location = new System.Drawing.Point(84, 3);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(35, 29);
             this.button8.TabIndex = 2;
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button7
             // 
@@ -288,7 +308,7 @@
             this.button7.Font = new System.Drawing.Font("宋体", 12F);
             this.button7.Location = new System.Drawing.Point(41, 3);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(39, 29);
+            this.button7.Size = new System.Drawing.Size(37, 29);
             this.button7.TabIndex = 1;
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -300,26 +320,8 @@
             this.label3.Location = new System.Drawing.Point(15, 25);
             this.label3.MaximumSize = new System.Drawing.Size(200, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(176, 16);
+            this.label3.Size = new System.Drawing.Size(0, 16);
             this.label3.TabIndex = 0;
-            this.label3.Text = "142134534534534547657";
-            // 
-            // listView1
-            // 
-            this.listView1.BackColor = System.Drawing.SystemColors.Control;
-            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.listView1.Font = new System.Drawing.Font("宋体", 15F);
-            this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(21, 32);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.OwnerDraw = true;
-            this.listView1.ShowGroups = false;
-            this.listView1.Size = new System.Drawing.Size(136, 179);
-            this.listView1.TabIndex = 4;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // Form3
             // 
@@ -347,7 +349,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -355,18 +356,19 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         internal System.Windows.Forms.Button button10;
         internal System.Windows.Forms.Button button1;
         internal System.Windows.Forms.Button button2;
         internal System.Windows.Forms.Button button3;
         internal System.Windows.Forms.ListView listView1;
+        internal System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.Label label3;
+        internal System.Windows.Forms.Button button9;
+        internal System.Windows.Forms.Button button6;
+        internal System.Windows.Forms.Button button8;
     }
 }
 

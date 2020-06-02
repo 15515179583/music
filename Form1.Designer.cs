@@ -115,6 +115,7 @@
             this.button4.TabIndex = 3;
             this.button4.Text = "+";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBox1
             // 
@@ -306,6 +307,7 @@
             this.button9.TabIndex = 2;
             this.button9.Text = "随机切歌";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
@@ -326,7 +328,7 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.39175F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.60825F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 57F));
             this.tableLayoutPanel2.Controls.Add(this.button6, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.button8, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.button7, 1, 0);
@@ -344,9 +346,10 @@
             this.button6.Image = global::music.Properties.Resources.shangyiqu101;
             this.button6.Location = new System.Drawing.Point(3, 3);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(32, 29);
+            this.button6.Size = new System.Drawing.Size(31, 29);
             this.button6.TabIndex = 0;
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button8
             // 
@@ -354,11 +357,12 @@
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(85, 3);
+            this.button8.Location = new System.Drawing.Point(83, 3);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(35, 29);
             this.button8.TabIndex = 2;
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button7
             // 
@@ -367,9 +371,9 @@
             this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("宋体", 12F);
-            this.button7.Location = new System.Drawing.Point(41, 3);
+            this.button7.Location = new System.Drawing.Point(40, 3);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(38, 29);
+            this.button7.Size = new System.Drawing.Size(37, 29);
             this.button7.TabIndex = 1;
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -381,9 +385,8 @@
             this.label3.Location = new System.Drawing.Point(15, 25);
             this.label3.MaximumSize = new System.Drawing.Size(200, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(176, 16);
+            this.label3.Size = new System.Drawing.Size(0, 16);
             this.label3.TabIndex = 0;
-            this.label3.Text = "142134534534534547657";
             // 
             // Form1
             // 

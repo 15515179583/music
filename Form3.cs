@@ -14,6 +14,10 @@ namespace music
     {
         MP3Player mp3 = new MP3Player();
         Form2 form2 = new Form2();
+        Musics musics = new Musics("mp3");
+        internal int musicId = 0;
+        internal int musicsLength = 0;
+        internal List<Music> musicArr = null;
         public Form3()
         {
             InitializeComponent();
@@ -32,7 +36,6 @@ namespace music
                 listView1.Items.Add(lvi);
             }
             this.listView1.EndUpdate();
-            mp3.FilePath = "mp3/不再联系-夏天Alex.mp3";
             
         }
         private void Form3_Closing(object sender, CancelEventArgs e)
@@ -42,7 +45,6 @@ namespace music
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            //Application.ExitThread();
             form2.Show();
             form2.button4.Click += button4_Click;
 
@@ -50,22 +52,16 @@ namespace music
         private void button4_Click(object sender, EventArgs e)
         {
             this.Show();
-            //listView1 加载数据
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            /*pictureBox2.ImageLocation = "images/hot.jpg";
-            //pictureBox2.ImageLocation = "images/bg1.jpg";
-            label2.Text = "热歌榜";*/
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            /*pictureBox2.ImageLocation = "images/tuijian.jpg";
-            label2.Text = "推荐榜";*/
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -74,6 +70,7 @@ namespace music
             mp3.Play();
         }
 
+        #region 暂停/播放
         private void button7_Click(object sender, EventArgs e)
         {
             if (this.button7.Font.Size == 12)
@@ -90,6 +87,50 @@ namespace music
             }
             
         }
+        #endregion
+
+        #region 随机切歌
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Random rd = new Random();
+            musicId = rd.Next(0, musics.length);
+            Music music = musicArr[musicId];
+            mp3.FilePath = music.getMusicPath();
+            label3.Text = music.getMusicName();
+            mp3.Play();
+        }
+        #endregion
+
+        #region 上一曲
+        private void button6_Click(object sender, EventArgs e)
+        {
+            musicId -= 1;
+            if (musicId < 0)
+            {
+                musicId = musicsLength - 1;
+            }
+
+            Music music = musicArr[musicId];
+            mp3.FilePath = music.getMusicPath();
+            label3.Text = music.getMusicName();
+            mp3.Play();
+        }
+        #endregion
+
+        #region 下一曲
+        private void button8_Click(object sender, EventArgs e)
+        {
+            musicId += 1;
+            if (musicId == musicsLength)
+            {
+                musicId = 0;
+            }
+            Music music = musicArr[musicId];
+            mp3.FilePath = music.getMusicPath();
+            label3.Text = music.getMusicName();
+            mp3.Play();
+        }
+        #endregion
 
     }
 }

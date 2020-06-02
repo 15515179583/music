@@ -10,7 +10,7 @@ namespace music
 {
     class HttpUitls
     {
-        public static string Get(string Url)
+        public string Get(string Url)
         {
             //System.GC.Collect();
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
@@ -40,13 +40,12 @@ namespace music
             return retString;
         }
 
-        public static string Post(string Url, string Data, string Referer)
+        public string Post(string Url, string Data)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
             request.Method = "POST";
-            request.Referer = Referer;
             byte[] bytes = Encoding.UTF8.GetBytes(Data);
-            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
             request.ContentLength = bytes.Length;
             Stream myResponseStream = request.GetRequestStream();
             myResponseStream.Write(bytes, 0, bytes.Length);
@@ -70,8 +69,10 @@ namespace music
         }
     }
 }
-
-
-/*string url = "http://www.kuaidi100.com/query?type=shunfeng&postid=367847964498";
+/*
+string url = "https://defcon.cn/dmusic/?name=%E5%90%8E%E6%9D%A5&type=netease";
+  http://wedlaa.com/?name=%E5%91%8A%E7%99%BD%E6%B0%94%E7%90%83&type=kugou
 string getJson = HttpUitls.Get(url);
-MessageBox.Show(getJson);*/
+MessageBox.Show(getJson);
+
+*/

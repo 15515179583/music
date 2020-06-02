@@ -9,7 +9,10 @@ namespace music
 {
     class Musics
     {
-        public List<Music> getmusics(String musicPath)
+        internal List<Music> musicArr;
+        internal int length = 0;
+
+        /*public List<Music> getmusics(String musicPath)
         {
             List<Music> objArr = new List<Music>();
             string[] files = Directory.GetFiles(musicPath);
@@ -21,6 +24,20 @@ namespace music
                 objArr.Add(new Music(musicName, author));
             }
             return objArr;
+        }*/
+        public Musics(String musicPath)
+        {
+            List<Music> objArr = new List<Music>();
+            string[] files = Directory.GetFiles(musicPath);
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                string musicName = files[i].Split('\\')[1].Split('.')[0].Split('-')[0];
+                string author = files[i].Split('\\')[1].Split('.')[0].Split('-')[1];
+                objArr.Add(new Music(musicName, author,files[i]));
+            }
+            this.musicArr = objArr;
+            this.length = files.Length;
         }
     }
 }
