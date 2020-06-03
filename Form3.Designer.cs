@@ -31,11 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.button4 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
@@ -51,6 +49,7 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -62,8 +61,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.groupBox3);
+            this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
             this.groupBox1.Location = new System.Drawing.Point(9, 9);
@@ -73,27 +72,13 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
-            // button3
-            // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(9, 489);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(172, 44);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "登录/注册";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.listView1);
-            this.groupBox3.Controls.Add(this.button4);
-            this.groupBox3.Controls.Add(this.textBox1);
-            this.groupBox3.Location = new System.Drawing.Point(6, 240);
+            this.groupBox3.Location = new System.Drawing.Point(9, 240);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(178, 243);
-            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             // 
             // listView1
@@ -103,35 +88,28 @@
             this.listView1.Cursor = System.Windows.Forms.Cursors.Default;
             this.listView1.Font = new System.Drawing.Font("宋体", 15F);
             this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(21, 32);
+            this.listView1.LabelEdit = true;
+            this.listView1.Location = new System.Drawing.Point(6, 20);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.OwnerDraw = true;
             this.listView1.ShowGroups = false;
-            this.listView1.Size = new System.Drawing.Size(136, 179);
-            this.listView1.TabIndex = 4;
+            this.listView1.Size = new System.Drawing.Size(166, 179);
+            this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
-            // button4
+            // button3
             // 
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button4.Font = new System.Drawing.Font("宋体", 15F);
-            this.button4.Location = new System.Drawing.Point(122, 207);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(50, 30);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "+";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("宋体", 15F);
-            this.textBox1.Location = new System.Drawing.Point(6, 207);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 30);
-            this.textBox1.TabIndex = 2;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.Enabled = false;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button3.Location = new System.Drawing.Point(9, 489);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(172, 44);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "登录/注册";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // pictureBox1
             // 
@@ -247,7 +225,6 @@
             // button10
             // 
             this.button10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button10.Enabled = false;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button10.Font = new System.Drawing.Font("宋体", 10F);
             this.button10.ForeColor = System.Drawing.Color.RoyalBlue;
@@ -255,15 +232,16 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(75, 29);
             this.button10.TabIndex = 3;
-            this.button10.Text = "查看歌词";
+            this.button10.Text = "全部歌词";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.39175F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.60825F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 56F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 59F));
             this.tableLayoutPanel2.Controls.Add(this.button6, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.button8, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.button7, 1, 0);
@@ -281,7 +259,7 @@
             this.button6.Image = global::music.Properties.Resources.shangyiqu101;
             this.button6.Location = new System.Drawing.Point(3, 3);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(32, 29);
+            this.button6.Size = new System.Drawing.Size(30, 29);
             this.button6.TabIndex = 0;
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
@@ -292,7 +270,7 @@
             this.button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(84, 3);
+            this.button8.Location = new System.Drawing.Point(81, 3);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(35, 29);
             this.button8.TabIndex = 2;
@@ -306,9 +284,9 @@
             this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("宋体", 12F);
-            this.button7.Location = new System.Drawing.Point(41, 3);
+            this.button7.Location = new System.Drawing.Point(39, 3);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(37, 29);
+            this.button7.Size = new System.Drawing.Size(36, 29);
             this.button7.TabIndex = 1;
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -323,6 +301,11 @@
             this.label3.Size = new System.Drawing.Size(0, 16);
             this.label3.TabIndex = 0;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -335,7 +318,6 @@
             this.Text = "歌词页";
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -351,10 +333,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button button7;
@@ -363,12 +342,14 @@
         internal System.Windows.Forms.Button button1;
         internal System.Windows.Forms.Button button2;
         internal System.Windows.Forms.Button button3;
-        internal System.Windows.Forms.ListView listView1;
         internal System.Windows.Forms.GroupBox groupBox2;
         internal System.Windows.Forms.Label label3;
         internal System.Windows.Forms.Button button9;
         internal System.Windows.Forms.Button button6;
         internal System.Windows.Forms.Button button8;
+        private System.Windows.Forms.GroupBox groupBox3;
+        internal System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

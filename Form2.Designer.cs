@@ -166,23 +166,23 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(330, 37);
             this.button4.TabIndex = 5;
-            this.button4.Text = "登录";
+            this.button4.Text = "登录/注册";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(230, 195);
+            this.textBox2.Location = new System.Drawing.Point(189, 195);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(153, 30);
+            this.textBox2.Size = new System.Drawing.Size(194, 30);
             this.textBox2.TabIndex = 4;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(230, 114);
+            this.textBox1.Location = new System.Drawing.Point(189, 114);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(153, 30);
+            this.textBox1.Size = new System.Drawing.Size(194, 30);
             this.textBox1.TabIndex = 3;
             // 
             // label4
@@ -190,24 +190,24 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(85, 198);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 20);
+            this.label4.Size = new System.Drawing.Size(89, 20);
             this.label4.TabIndex = 2;
-            this.label4.Text = "密  码";
+            this.label4.Text = "密  码：";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(85, 117);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 20);
+            this.label3.Size = new System.Drawing.Size(89, 20);
             this.label3.TabIndex = 1;
-            this.label3.Text = "用户名";
+            this.label3.Text = "用户名：";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 20F);
-            this.label2.Location = new System.Drawing.Point(147, 40);
+            this.label2.Location = new System.Drawing.Point(173, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(120, 27);
             this.label2.TabIndex = 0;

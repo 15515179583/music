@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +15,10 @@ namespace music
     {
         MP3Player mp3 = new MP3Player();
         Form2 form2 = new Form2();
-        Musics musics = new Musics("mp3");
         internal int musicId = 0;
         internal int musicsLength = 0;
         internal List<Music> musicArr = null;
+        internal string[] song = null;
         public Form3()
         {
             InitializeComponent();
@@ -25,18 +26,6 @@ namespace music
             this.button6.FlatAppearance.BorderSize = 0;
             this.button7.FlatAppearance.BorderSize = 0;
             this.button8.FlatAppearance.BorderSize = 0;
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.BeginUpdate();
-            for (int i = 0; i < 8; i++)
-            {
-                ListViewItem lvi = new ListViewItem();
-                lvi.ImageIndex = 0;
-                lvi.Text = "item" + i;
-                lvi.SubItems.Add("第2列");
-                listView1.Items.Add(lvi);
-            }
-            this.listView1.EndUpdate();
-            
         }
         private void Form3_Closing(object sender, CancelEventArgs e)
         {
@@ -93,11 +82,18 @@ namespace music
         private void button9_Click(object sender, EventArgs e)
         {
             Random rd = new Random();
-            musicId = rd.Next(0, musics.length);
+            musicId = rd.Next(0, musicsLength);
             Music music = musicArr[musicId];
             mp3.FilePath = music.getMusicPath();
             label3.Text = music.getMusicName();
             mp3.Play();
+
+            try
+            {
+                string strPath = AppDomain.CurrentDomain.BaseDirectory + "lrc/" + musicArr[musicId].getMusicName() + ".lrc";
+                song = File.ReadAllLines(strPath);
+            }
+            catch { }
         }
         #endregion
 
@@ -114,6 +110,13 @@ namespace music
             mp3.FilePath = music.getMusicPath();
             label3.Text = music.getMusicName();
             mp3.Play();
+
+            try
+            {
+                string strPath = AppDomain.CurrentDomain.BaseDirectory + "lrc/" + musicArr[musicId].getMusicName() + ".lrc";
+                song = File.ReadAllLines(strPath);
+            }
+            catch { }
         }
         #endregion
 
@@ -129,8 +132,49 @@ namespace music
             mp3.FilePath = music.getMusicPath();
             label3.Text = music.getMusicName();
             mp3.Play();
+
+            try
+            {
+                string strPath = AppDomain.CurrentDomain.BaseDirectory + "lrc/" + musicArr[musicId].getMusicName() + ".lrc";
+                song = File.ReadAllLines(strPath);
+            }
+            catch { }
         }
         #endregion
+
+        #region 渲染歌词
+        private void groupBox_Paint()
+        {
+            Graphics gobj = groupBox2.CreateGraphics();
+            SolidBrush brush = new SolidBrush(BackColor);
+            gobj.FillRectangle(brush, (float)10, (float)10, (float)500, (float)500);
+
+            Font font = new Font("宋体", 15);
+            brush.Color = Color.Red;
+            
+            gobj.DrawString("暂不提供动态歌词", font, brush, 200, 100);
+            brush.Color = Color.Magenta;
+            try { gobj.DrawString(song[0], font, brush, 20, 200); }
+            catch { }
+            
+        }
+        #endregion
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            groupBox_Paint();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strPath = AppDomain.CurrentDomain.BaseDirectory + "lrc/" + musicArr[musicId].getMusicName() + ".lrc";
+                MessageBox.Show(File.ReadAllText(strPath));
+                //File.ReadAllLines(strPath);
+            }
+            catch { }
+        }
 
     }
 }

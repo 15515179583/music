@@ -9,10 +9,11 @@ namespace music
 {
     class Musics
     {
-        internal List<Music> musicArr;
-        internal int length = 0;
+        private List<Music> musicArr;
+        private int length = 0;
 
-        /*public List<Music> getmusics(String musicPath)
+        #region 文件法获取歌曲列表
+        public void getmusicByFile(String musicPath)
         {
             List<Music> objArr = new List<Music>();
             string[] files = Directory.GetFiles(musicPath);
@@ -21,23 +22,41 @@ namespace music
             {
                 string musicName = files[i].Split('\\')[1].Split('.')[0].Split('-')[0];
                 string author = files[i].Split('\\')[1].Split('.')[0].Split('-')[1];
-                objArr.Add(new Music(musicName, author));
-            }
-            return objArr;
-        }*/
-        public Musics(String musicPath)
-        {
-            List<Music> objArr = new List<Music>();
-            string[] files = Directory.GetFiles(musicPath);
-
-            for (int i = 0; i < files.Length; i++)
-            {
-                string musicName = files[i].Split('\\')[1].Split('.')[0].Split('-')[0];
-                string author = files[i].Split('\\')[1].Split('.')[0].Split('-')[1];
-                objArr.Add(new Music(musicName, author,files[i]));
+                String mid = i.ToString();
+                objArr.Add(new Music(musicName, author,files[i],mid));
             }
             this.musicArr = objArr;
             this.length = files.Length;
+        }
+        #endregion
+
+        #region 数据库获取歌曲列表
+        public void setMusics(String type)
+        {
+            SqlFun sqlFun = new SqlFun();
+            if (type.Equals("hot") == true)
+            {
+                this.musicArr = sqlFun.getHot();
+                this.length = sqlFun.getLength();
+            }
+            else if (type.Equals("recommend") == true)
+            {
+                //this.musicArr = sqlFun.getRecommend();
+                this.musicArr = sqlFun.getRecommend();
+                this.length = sqlFun.getLength();
+            }
+        }
+        #endregion
+
+
+        public List<Music> getMusics()
+        {
+            return this.musicArr;
+        }
+
+        public int getLength()
+        {
+            return this.length;
         }
     }
 }
