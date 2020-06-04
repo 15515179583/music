@@ -21,11 +21,14 @@ namespace music
         Form3 form3 = new Form3();
         Musics musics = new Musics();
         List<Music> musicArr = null;
+        List<MusicList> list = null;
 
         String user = "";
         int musicId = 0;
         int musicsLength = 0;
         string[] song = null;
+
+        bool listReload = false;
 
         public Form1()
         {
@@ -35,6 +38,7 @@ namespace music
             this.button8.FlatAppearance.BorderSize = 0;
 
             listView2_Draw("hot");
+            contextMenuStrip2_Draw();
         }
 
         #region 绘制歌曲列表
@@ -65,21 +69,49 @@ namespace music
         #endregion
 
         #region 绘制歌单列表
-        private void listView1_Draw()
+        private void listView1_Draw(String user)
         {
+            this.listView1.Clear();
             this.listView1.Columns.Add("我的歌单", 147, HorizontalAlignment.Center); //一步添加
             this.listView1.Columns.Add("", 2, HorizontalAlignment.Center); //一步添加
             this.listView1.SmallImageList = this.imageList1;
 
             this.listView1.BeginUpdate();
-            for (int i = 0; i < 7; i++)
+            list = sqlfun.getList(user);
+            for (int i = 0; i < sqlfun.getListLength(); i++)
             {
+                
                 ListViewItem lvi = new ListViewItem();
                 lvi.ImageIndex = 0;
-                lvi.Text = "默认歌单" + (i + 1);
+                lvi.Text = list[i].getName();
                 listView1.Items.Add(lvi);
             }
             this.listView1.EndUpdate();
+        }
+        #endregion
+
+        #region 绘制歌曲右键菜单
+        private void contextMenuStrip2_Draw()
+        {
+            contextMenuStrip2.Items.Clear();
+            ToolStripMenuItem item = new ToolStripMenuItem("播放", null, paly_Click);
+            contextMenuStrip2.Items.Add(item);
+            try 
+            { 
+                item = new ToolStripMenuItem("从歌单【" + list[listView1.SelectedIndices[0]].getName() +  "】移除", null);
+                contextMenuStrip2.Items.Add(item);
+            }
+            catch 
+            {
+                if (sqlfun.getListLength() != 0)
+                {
+                    for (int i = 0; i < sqlfun.getListLength(); i++)
+                    {
+                        item = new ToolStripMenuItem("添加至【" + list[i].getName() + "】", null);
+                        contextMenuStrip2.Items.Add(item);
+                    }
+                }
+            }
         }
         #endregion
 
@@ -106,9 +138,24 @@ namespace music
         #region 创建用户歌单
         private void button4_Click(object sender, EventArgs e)
         {
-            //this.Show();
-            HttpUitls http = new HttpUitls();
-            //MessageBox.Show(http.Get("http://mp3.wedlaa.com/index.php?c=music&a=song&key=%E5%91%8A%E7%99%BD%E6%B0%94%E7%90%83&filter=name&type=kugou&page=1"));
+            String name = textBox1.Text.Trim();
+            if (name != ""&& name.Length <=5)
+            {
+                if (sqlfun.createList(name, user) == 1)
+                {
+                    MessageBox.Show("创建成功", "创建成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    listReload = true;
+                    textBox1.Text = "";
+                }
+                else
+                {
+                    MessageBox.Show("歌单创建失败", "创建失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("未输入歌单名称或歌单过长","创建失败",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
         #endregion
 
@@ -120,6 +167,11 @@ namespace music
             //pictureBox2.ImageLocation = "images/bg1.jpg";
             listView2_Draw("hot");
             label2.Text = "热歌榜";
+            //listView1.
+            foreach (ListViewItem item in listView1.SelectedItems)
+            {
+                item.Selected = false;
+            }
         }
         #endregion
 
@@ -130,6 +182,24 @@ namespace music
             listView2_Draw("recommend");
             pictureBox2.ImageLocation = "images/tuijian.jpg";
             label2.Text = "推荐榜";
+
+            foreach (ListViewItem item in listView1.SelectedItems)
+            {
+                item.Selected = false;
+            }
+        }
+        #endregion
+
+        #region 用户歌单
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                contextMenuStrip2_Draw();
+                listView2_Draw(list[listView1.SelectedIndices[0]].getId());
+                label2.Text = list[listView1.SelectedIndices[0]].getName();
+            }
+            catch { }
         }
         #endregion
 
@@ -247,7 +317,6 @@ namespace music
             mp3.FilePath = music.getMusicPath();
             label3.Text = music.getMusicName();
             mp3.Play();
-
             try
             {
                 string strPath = AppDomain.CurrentDomain.BaseDirectory + "lrc/" + musicArr[musicId].getMusicName() + ".lrc";
@@ -257,6 +326,55 @@ namespace music
         }
         #endregion
 
+        # region 删除歌单
+        private void 删除歌单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("确定删除吗？", "删除", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                //删除歌单
+                try
+                {
+                    int i = sqlfun.delList(list[listView1.SelectedIndices[0]].getId().ToString());
+                    if (i == 1)
+                    {
+                        listReload = true;
+                        MessageBox.Show("删除成功", "成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    else
+                    {
+                        MessageBox.Show("删除失败", "失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch { }
+
+            }
+            else
+            {
+                return;
+            }
+        }
+        #endregion
+
+        # region 播放键
+        private void paly_Click(object sender, EventArgs e)
+        {
+
+            musicId = listView2.SelectedIndices[0];
+            Music music = musicArr[musicId];
+            mp3.FilePath = music.getMusicPath();
+            label3.Text = music.getMusicName();
+            mp3.Play();
+            try
+            {
+                string strPath = AppDomain.CurrentDomain.BaseDirectory + "lrc/" + musicArr[musicId].getMusicName() + ".lrc";
+                song = File.ReadAllLines(strPath);
+            }
+            catch { }
+        }
+        #endregion
+
+        #region 动态刷新
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (user == "")
@@ -269,12 +387,82 @@ namespace music
                     button3.Enabled = false;
 
                     /*显示歌单*/
-                    listView1_Draw();
+                    listView1_Draw(user);
+                    contextMenuStrip2_Draw();
+                    //contextMenuStrip2.ItemAdded();
+
                     textBox1.Visible = true;
                     button4.Visible = true;
                 }
             }
+            if (listReload == true)
+            {
+                listView1_Draw(user);
+                contextMenuStrip2_Draw();
+                listReload = false;
+            }
         }
+        #endregion
 
+        #region 右键弹出菜单功能实现
+        private void contextMenuStrip2_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            for (int i = 0; i < contextMenuStrip2.Items.Count; i++)
+            {
+                try
+                {
+                    String rmLid = listView1.SelectedIndices[0].ToString();
+                    if (i == 1 && contextMenuStrip2.Items[i].Selected == true)
+                    {
+                        String Mid = musicArr[listView2.SelectedIndices[0]].getMid();
+                        String Lid = list[listView1.SelectedIndices[0]].getId();
+                        int flag = sqlfun.delMusicToList(Mid, Lid);
+                        if (flag == 1)
+                        {
+                            MessageBox.Show("音乐从歌单删除成功", "成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            //listView2_Draw(user);
+                        }
+                        else
+                        {
+                            MessageBox.Show("音乐从歌单删除失败", "失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch
+                {
+                    if (i != 0 && contextMenuStrip2.Items[i].Selected == true)
+                    {
+                        String Mid = musicArr[listView2.SelectedIndices[0]].getMid();
+                        String Lid = list[i - 1].getId();
+                        int flag = sqlfun.setMusicToList(Mid, Lid);
+                        if (flag == 1)
+                        {
+                            MessageBox.Show("音乐添加到歌单成功", "成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                        else
+                        {
+                            MessageBox.Show("音乐添加到歌单失败", "失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region 随机产生用户歌单图片
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Random rd = new Random();
+            String picId = rd.Next(1,4).ToString();
+            if (picId == "1")
+            {
+                pictureBox2.ImageLocation = "images/musicList1.gif";
+            }
+            else
+            {
+                pictureBox2.ImageLocation = "images/musicList" + picId + ".jpg";
+            }
+        }
+        #endregion
     }
 }

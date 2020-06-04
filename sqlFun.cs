@@ -10,6 +10,7 @@ namespace music
     class SqlFun
     {
         private int length = 0;
+        private int listLength = 0;
         private bool loginState = false;
         private String loginMsg = "";
 
@@ -136,9 +137,112 @@ namespace music
         }
         #endregion
 
+        #region 获取歌单
+        public List<MusicList> getList(String user)
+        {
+            this.listLength = 0;
+            List<MusicList> objArr = new List<MusicList>();
+            MySqlConnection conn = CreateConn();
+            string sqlQuery = "SELECT * FROM `musicList` where user = \"" + user + "\"";
+            MySqlCommand comm = new MySqlCommand(sqlQuery, conn);
+            MySqlDataReader dr = comm.ExecuteReader();
+
+            while (dr.Read())
+            {
+                String id = dr.GetValue(0).ToString();
+                String name = dr.GetValue(1).ToString();
+                objArr.Add(new MusicList(id,name));
+                this.listLength += 1;
+            }
+            conn.Close();
+            return objArr;
+        }
+        #endregion
+
+        #region 创建歌单
+        public int createList(String name, String user)
+        {
+            MySqlConnection conn = CreateConn();
+            string sql = "INSERT INTO `musicList` SET name = \"" + name + "\", user = \"" + user + "\"";
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            int i = comm.ExecuteNonQuery();
+
+            conn.Close();
+            return i;
+        }
+        #endregion
+
+        #region 删除歌单
+        public int delList(String id)
+        {
+            MySqlConnection conn = CreateConn();
+            string sql = "DELETE FROM musicList WHERE id =  \"" + id + "\"";
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            int i = comm.ExecuteNonQuery();
+
+            conn.Close();
+            return i;
+        }
+        #endregion
+
+        #region 获取歌单歌曲
+        public List<Music> getListMusics(String lid)
+        {
+            this.length = 0;
+            List<Music> objArr = new List<Music>();
+            String basePath = "mp3\\";
+            MySqlConnection conn = CreateConn();
+            string sqlQuery = "SELECT * FROM music a LEFT JOIN userMusic b ON a.`id` = b.`mid` WHERE b.`lid` = \"" + lid + "\" ORDER BY b.id DESC";
+            MySqlCommand comm = new MySqlCommand(sqlQuery, conn);
+            MySqlDataReader dr = comm.ExecuteReader();
+
+            while (dr.Read())
+            {
+                String mid = dr.GetValue(0).ToString();
+                String path = basePath + dr.GetValue(1).ToString();
+                String musicName = dr.GetValue(2).ToString();
+                String author = dr.GetValue(3).ToString();
+                objArr.Add(new Music(musicName, author, path, mid));
+                this.length += 1;
+            }
+            conn.Close();
+            return objArr;
+        }
+        #endregion
+
+        #region 添加歌曲到歌单
+        public int setMusicToList(String mid, String lid)
+        {
+            MySqlConnection conn = CreateConn();
+            string sql = "INSERT INTO `userMusic` SET mid = \"" + mid + "\", lid = \"" + lid + "\"";
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            int i = comm.ExecuteNonQuery();
+
+            conn.Close();
+            return i;
+        }
+        #endregion
+
+        #region 从歌单删除歌曲
+        public int delMusicToList(String mid, String lid)
+        {
+            MySqlConnection conn = CreateConn();
+            string sql = "DELETE FROM usermusic WHERE `mid` = " + mid + " AND lid = " + lid;
+            MySqlCommand comm = new MySqlCommand(sql, conn);
+            int i = comm.ExecuteNonQuery();
+
+            conn.Close();
+            return i;
+        }
+        #endregion
+
         public int getLength()
         {
             return this.length;
+        }
+        public int getListLength()
+        {
+            return this.listLength;
         }
 
         public bool getLoginState()

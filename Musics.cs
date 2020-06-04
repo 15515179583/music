@@ -45,6 +45,11 @@ namespace music
                 this.musicArr = sqlFun.getRecommend();
                 this.length = sqlFun.getLength();
             }
+            else
+            {
+                this.musicArr = sqlFun.getListMusics(type);
+                this.length = sqlFun.getLength();
+            }
         }
         #endregion
 

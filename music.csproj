@@ -72,10 +72,9 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="HttpUitls.cs" />
     <Compile Include="MP3Player.cs" />
     <Compile Include="Music.cs" />
-    <Compile Include="MusicPlayer.cs" />
+    <Compile Include="MusicList.cs" />
     <Compile Include="Musics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -36,7 +36,7 @@ namespace music
                     if (sqlfun.getLoginState())
                     {
                         this.user = username;
-                        MessageBox.Show(sqlfun.getLoginMsg());
+                        MessageBox.Show(sqlfun.getLoginMsg(), "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Hide();
                     }
                     else
